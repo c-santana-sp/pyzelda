@@ -1,11 +1,13 @@
 import pygame
 from settings import *
 
+
 class Player(pygame.sprite.Sprite):
     def __init__(self, pos, groups, obstacle_sprites):
         super().__init__(groups)
         self.image = pygame.image.load('../graphics/test/player.png').convert_alpha()
-        self.rect = self.image.get_rect(topleft = pos)
+        self.rect = self.image.get_rect(topleft=pos)
+        self.hitbox = self.rect.inflate(0, -26)
 
         self.direction = pygame.math.Vector2()
         self.speed = 5
@@ -42,17 +44,17 @@ class Player(pygame.sprite.Sprite):
         if direction == 'horizontal':
             for sprite in self.obstacle_sprites:
                 if sprite.rect.colliderect(self.rect):
-                    if self.direction.x > 0: # moving right
+                    if self.direction.x > 0:  # moving right
                         self.rect.right = sprite.rect.left
-                    if self.direction.x < 0: # moving left
+                    if self.direction.x < 0:  # moving left
                         self.rect.left = sprite.rect.right
-    
+
         if direction == 'vertical':
             for sprite in self.obstacle_sprites:
                 if sprite.rect.colliderect(self.rect):
-                    if self.direction.y > 0: # moving down
+                    if self.direction.y > 0:  # moving down
                         self.rect.bottom = sprite.rect.top
-                    if self.direction.y < 0: # moving left
+                    if self.direction.y < 0:  # moving left
                         self.rect.top = sprite.rect.bottom
 
     def update(self):
