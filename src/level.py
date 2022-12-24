@@ -10,7 +10,7 @@ class Level:
         self.display_surface = pygame.display.get_surface()
 
         self.visible_sprites = YSortCameraGroup()
-        self.obstacles_sprite = pygame.sprite.Group()
+        self.obstacles_sprites = pygame.sprite.Group()
 
         self.create_map()
 
@@ -21,9 +21,9 @@ class Level:
                 y = row_index * TILESIZE
 
                 if column == 'x':
-                    Tile((x, y), [self.visible_sprites, self.obstacles_sprite])
+                    Tile((x, y), [self.visible_sprites, self.obstacles_sprites])
                 elif column == 'p':
-                    self.player = Player((x, y), [self.visible_sprites])
+                    self.player = Player((x, y), [self.visible_sprites], self.obstacles_sprites)
 
     def run(self):
         self.visible_sprites.custom_draw(self.player)
